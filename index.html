@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DND Персонажи</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts для D&D стиля -->
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cinzel:wght@400;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    
+    <!-- Иконки -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Наши стили -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Главный контейнер -->
+    <div class="container-fluid dnd-container">
+        <!-- Шапка -->
+        <header class="dnd-header">
+            <div class="row align-items-center py-3">
+                <div class="col-md-6">
+                    <h1 class="dnd-title">
+                        <i class="bi bi-dice-6-fill"></i>
+                        DND Персонажи
+                    </h1>
+                </div>
+                <div class="col-md-6 text-end">
+                    <nav class="dnd-nav">
+                        <button id="mainTabBtn" class="btn btn-dnd-primary active">
+                            <i class="bi bi-house-door"></i> Главное
+                        </button>
+                        <button id="createCharacterBtn" class="btn btn-dnd-secondary">
+                            <i class="bi bi-plus-circle"></i> Создать персонажа
+                        </button>
+                        <button id="myCharactersBtn" class="btn btn-dnd-secondary">
+                            <i class="bi bi-person-badge"></i> Мои персонажи
+                        </button>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Основное содержимое -->
+        <main id="mainContent" class="dnd-main-content">
+            <!-- Главная вкладка -->
+            <div id="mainTab" class="content-tab active">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="dnd-welcome-card">
+                            <div class="text-center mb-4">
+                                <i class="bi bi-dice-6 dnd-dice-icon"></i>
+                                <h2>Добро пожаловать в Мастерскую Персонажей D&D</h2>
+                                <p class="lead">Создайте и управляйте своими персонажами для приключений в Dungeons & Dragons</p>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="dnd-feature-card">
+                                        <i class="bi bi-person-plus"></i>
+                                        <h4>Создание персонажа</h4>
+                                        <p>Пошаговое создание персонажа по всем правилам D&D 5e</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="dnd-feature-card">
+                                        <i class="bi bi-journal-text"></i>
+                                        <h4>Управление персонажами</h4>
+                                        <p>Храните и редактируйте всех ваших персонажей в одном месте</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center mt-4">
+                                <button id="startCreatingBtn" class="btn btn-dnd-primary btn-lg">
+                                    Начать создание персонажа
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вкладка создания персонажа -->
+            <div id="createCharacterTab" class="content-tab">
+                <div class="dnd-form-container">
+                    <div class="dnd-form-header">
+                        <h2><i class="bi bi-person-plus"></i> Создание нового персонажа</h2>
+                        <p>Заполните информацию о вашем персонаже</p>
+                    </div>
+                    
+                    <!-- Навигация по вкладкам формы -->
+                    <ul class="nav nav-pills dnd-form-nav" id="characterFormTabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="pill" href="#basicInfo">
+                                <i class="bi bi-person"></i> Основное
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="pill" href="#attributes">
+                                <i class="bi bi-graph-up"></i> Характеристики
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="pill" href="#inventory">
+                                <i class="bi bi-backpack"></i> Инвентарь
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="pill" href="#status">
+                                <i class="bi bi-heart"></i> Состояния
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="pill" href="#notes">
+                                <i class="bi bi-journal-text"></i> Заметки
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="pill" href="#features">
+                                <i class="bi bi-stars"></i> Особенности
+                            </a>
+                        </li>
+                        <li class="nav-item" id="spellsTabItem" style="display: none;">
+                            <a class="nav-link" data-bs-toggle="pill" href="#spells">
+                                <i class="bi bi-magic"></i> Заклинания
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <!-- Содержимое вкладок формы -->
+                    <div class="tab-content" id="characterFormContent">
+                        <!-- Вкладка основных данных -->
+                        <div class="tab-pane fade show active" id="basicInfo">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="dnd-photo-section">
+                                        <div class="character-photo-container">
+                                            <img id="characterPhoto" src="assets/images/default-character.png" 
+                                                 alt="Фото персонажа" class="character-photo">
+                                        </div>
+                                        <input type="file" id="photoUpload" accept="image/jpeg,image/png,image/gif,image/webp" 
+                                               style="display: none;">
+                                        <button id="uploadPhotoBtn" class="btn btn-dnd-secondary btn-sm mt-2">
+                                            <i class="bi bi-upload"></i> Загрузить фото
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="characterName" class="form-label">Имя персонажа</label>
+                                                <input type="text" class="form-control dnd-input" 
+                                                       id="characterName" placeholder="Введите имя">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="characterRace" class="form-label">Раса</label>
+                                                <select class="form-select dnd-select" id="characterRace">
+                                                    <option value="">Выберите расу</option>
+                                                    <!-- Расы будут загружены через JavaScript -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="characterClass" class="form-label">Класс</label>
+                                                <select class="form-select dnd-select" id="characterClass">
+                                                    <option value="">Выберите класс</option>
+                                                    <!-- Классы будут загружены через JavaScript -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3" id="subclassSection" style="display: none;">
+                                                <label for="characterSubclass" class="form-label">Подкласс</label>
+                                                <select class="form-select dnd-select" id="characterSubclass">
+                                                    <option value="">Выберите подкласс</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="characterBackground" class="form-label">Предыстория</label>
+                                                <select class="form-select dnd-select" id="characterBackground">
+                                                    <option value="">Выберите предысторию</option>
+                                                    <!-- Предыстории будут загружены через JavaScript -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="characterAlignment" class="form-label">Мировоззрение</label>
+                                                <select class="form-select dnd-select" id="characterAlignment">
+                                                    <option value="">Выберите мировоззрение</option>
+                                                    <option value="lawful-good">Законно-доброе</option>
+                                                    <option value="neutral-good">Нейтрально-доброе</option>
+                                                    <option value="chaotic-good">Хаотично-доброе</option>
+                                                    <option value="lawful-neutral">Законно-нейтральное</option>
+                                                    <option value="true-neutral">Истинно-нейтральное</option>
+                                                    <option value="chaotic-neutral">Хаотично-нейтральное</option>
+                                                    <option value="lawful-evil">Законно-злое</option>
+                                                    <option value="neutral-evil">Нейтрально-злое</option>
+                                                    <option value="chaotic-evil">Хаотично-злое</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Пол</label>
+                                                <div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" 
+                                                               name="characterGender" id="genderMale" value="male">
+                                                        <label class="form-check-label" for="genderMale">Мужской</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" 
+                                                               name="characterGender" id="genderFemale" value="female">
+                                                        <label class="form-check-label" for="genderFemale">Женский</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Уровень</label>
+                                                <div class="level-container">
+                                                    <div class="level-circle" id="levelDisplay">1</div>
+                                                    <div class="experience-bar">
+                                                        <div class="exp-progress" style="width: 0%"></div>
+                                                        <span class="exp-text">0/300 XP</span>
+                                                    </div>
+                                                </div>
+                                                <input type="number" class="form-control dnd-input mt-2" 
+                                                       id="characterExperience" value="0" min="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="characterSpeed" class="form-label">Скорость</label>
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control dnd-input" 
+                                                           id="characterSpeed" value="30" readonly>
+                                                    <span class="input-group-text">фут.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="attributes">
+                            <div class="attributes-container">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="dnd-section">
+                                            <h4><i class="bi bi-graph-up"></i> Характеристики персонажа</h4>
+                                            
+                                            <!-- Информация о доступных очках -->
+                                            <div class="points-info mb-3">
+                                                <div class="row align-items-center">
+                                                    <div class="col-md-6">
+                                                        <span class="points-label">Доступно очков:</span>
+                                                        <span class="points-value" id="availablePoints">27</span>
+                                                    </div>
+                                                    <div class="col-md-6 text-end">
+                                                        <button id="randomizeAttributes" class="btn btn-dnd-warning btn-sm">
+                                                            <i class="bi bi-dice-6"></i> Зарандомить характеристики
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Характеристики -->
+                                            <div class="row">
+                                                <!-- Сила -->
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="attribute-card" data-attribute="strength">
+                                                        <div class="attribute-header">
+                                                            <div class="attribute-score">
+                                                                <input type="number" class="attribute-input" id="strength-score" value="8" min="8" max="15">
+                                                            </div>
+                                                            <div class="attribute-info">
+                                                                <h5>Сила (STR)</h5>
+                                                                <div class="attribute-modifier" id="strength-modifier">-1</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="attribute-controls">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input save-proficiency" type="checkbox" id="strength-save">
+                                                                <label class="form-check-label" for="strength-save">
+                                                                    <i class="bi bi-shield-check"></i> Спасбросок
+                                                                </label>
+                                                            </div>
+                                                            <div class="attribute-check">
+                                                                <span>Проверка:</span>
+                                                                <span class="check-value" id="strength-check">-1</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Ловкость -->
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="attribute-card" data-attribute="dexterity">
+                                                        <div class="attribute-header">
+                                                            <div class="attribute-score">
+                                                                <input type="number" class="attribute-input" id="dexterity-score" value="8" min="8" max="15">
+                                                            </div>
+                                                            <div class="attribute-info">
+                                                                <h5>Ловкость (DEX)</h5>
+                                                                <div class="attribute-modifier" id="dexterity-modifier">-1</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="attribute-controls">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input save-proficiency" type="checkbox" id="dexterity-save">
+                                                                <label class="form-check-label" for="dexterity-save">
+                                                                    <i class="bi bi-shield-check"></i> Спасбросок
+                                                                </label>
+                                                            </div>
+                                                            <div class="attribute-check">
+                                                                <span>Проверка:</span>
+                                                                <span class="check-value" id="dexterity-check">-1</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Телосложение -->
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="attribute-card" data-attribute="constitution">
+                                                        <div class="attribute-header">
+                                                            <div class="attribute-score">
+                                                                <input type="number" class="attribute-input" id="constitution-score" value="8" min="8" max="15">
+                                                            </div>
+                                                            <div class="attribute-info">
+                                                                <h5>Телосложение (CON)</h5>
+                                                                <div class="attribute-modifier" id="constitution-modifier">-1</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="attribute-controls">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input save-proficiency" type="checkbox" id="constitution-save">
+                                                                <label class="form-check-label" for="constitution-save">
+                                                                    <i class="bi bi-shield-check"></i> Спасбросок
+                                                                </label>
+                                                            </div>
+                                                            <div class="attribute-check">
+                                                                <span>Проверка:</span>
+                                                                <span class="check-value" id="constitution-check">-1</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Интеллект -->
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="attribute-card" data-attribute="intelligence">
+                                                        <div class="attribute-header">
+                                                            <div class="attribute-score">
+                                                                <input type="number" class="attribute-input" id="intelligence-score" value="8" min="8" max="15">
+                                                            </div>
+                                                            <div class="attribute-info">
+                                                                <h5>Интеллект (INT)</h5>
+                                                                <div class="attribute-modifier" id="intelligence-modifier">-1</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="attribute-controls">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input save-proficiency" type="checkbox" id="intelligence-save">
+                                                                <label class="form-check-label" for="intelligence-save">
+                                                                    <i class="bi bi-shield-check"></i> Спасбросок
+                                                                </label>
+                                                            </div>
+                                                            <div class="attribute-check">
+                                                                <span>Проверка:</span>
+                                                                <span class="check-value" id="intelligence-check">-1</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Мудрость -->
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="attribute-card" data-attribute="wisdom">
+                                                        <div class="attribute-header">
+                                                            <div class="attribute-score">
+                                                                <input type="number" class="attribute-input" id="wisdom-score" value="8" min="8" max="15">
+                                                            </div>
+                                                            <div class="attribute-info">
+                                                                <h5>Мудрость (WIS)</h5>
+                                                                <div class="attribute-modifier" id="wisdom-modifier">-1</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="attribute-controls">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input save-proficiency" type="checkbox" id="wisdom-save">
+                                                                <label class="form-check-label" for="wisdom-save">
+                                                                    <i class="bi bi-shield-check"></i> Спасбросок
+                                                                </label>
+                                                            </div>
+                                                            <div class="attribute-check">
+                                                                <span>Проверка:</span>
+                                                                <span class="check-value" id="wisdom-check">-1</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Харизма -->
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="attribute-card" data-attribute="charisma">
+                                                        <div class="attribute-header">
+                                                            <div class="attribute-score">
+                                                                <input type="number" class="attribute-input" id="charisma-score" value="8" min="8" max="15">
+                                                            </div>
+                                                            <div class="attribute-info">
+                                                                <h5>Харизма (CHA)</h5>
+                                                                <div class="attribute-modifier" id="charisma-modifier">-1</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="attribute-controls">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input save-proficiency" type="checkbox" id="charisma-save">
+                                                                <label class="form-check-label" for="charisma-save">
+                                                                    <i class="bi bi-shield-check"></i> Спасбросок
+                                                                </label>
+                                                            </div>
+                                                            <div class="attribute-check">
+                                                                <span>Проверка:</span>
+                                                                <span class="check-value" id="charisma-check">-1</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-4">
+                                                <div class="col-12">
+                                                    <div class="dnd-section">
+                                                        <h4><i class="bi bi-award"></i> Навыки</h4>
+                                                        
+                                                        <!-- Счетчик выбранных навыков -->
+                                                        <div class="skills-info mb-3">
+                                                            <span class="skills-label">Выбрано навыков:</span>
+                                                            <span class="skills-value">
+                                                                <span id="currentSkills">0</span>/<span id="maxSkills">4</span>
+                                                            </span>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <!-- Сила -->
+                                                                <div class="skill-category">
+                                                                    <h5>Сила (STR)</h5>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-athletics">
+                                                                            <label class="form-check-label" for="skill-athletics">
+                                                                                Атлетика
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-athletics-value">+0</div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Ловкость -->
+                                                                <div class="skill-category">
+                                                                    <h5>Ловкость (DEX)</h5>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-acrobatics">
+                                                                            <label class="form-check-label" for="skill-acrobatics">
+                                                                                Акробатика
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-acrobatics-value">+0</div>
+                                                                    </div>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-sleight-of-hand">
+                                                                            <label class="form-check-label" for="skill-sleight-of-hand">
+                                                                                Ловкость рук
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-sleight-of-hand-value">+0</div>
+                                                                    </div>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-stealth">
+                                                                            <label class="form-check-label" for="skill-stealth">
+                                                                                Скрытность
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-stealth-value">+0</div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Интеллект -->
+                                                                <div class="skill-category">
+                                                                    <h5>Интеллект (INT)</h5>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-arcana">
+                                                                            <label class="form-check-label" for="skill-arcana">
+                                                                                Магия
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-arcana-value">+0</div>
+                                                                    </div>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-history">
+                                                                            <label class="form-check-label" for="skill-history">
+                                                                                История
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-history-value">+0</div>
+                                                                    </div>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-investigation">
+                                                                            <label class="form-check-label" for="skill-investigation">
+                                                                                Расследование
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-investigation-value">+0</div>
+                                                                    </div>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-nature">
+                                                                            <label class="form-check-label" for="skill-nature">
+                                                                                Природа
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-nature-value">+0</div>
+                                                                    </div>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-religion">
+                                                                            <label class="form-check-label" for="skill-religion">
+                                                                                Религия
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-religion-value">+0</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <!-- Мудрость -->
+                                                                <div class="skill-category">
+                                                                    <h5>Мудрость (WIS)</h5>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-animal-handling">
+                                                                            <label class="form-check-label" for="skill-animal-handling">
+                                                                                Уход за животными
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-animal-handling-value">+0</div>
+                                                                    </div>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-insight">
+                                                                            <label class="form-check-label" for="skill-insight">
+                                                                                Проницательность
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-insight-value">+0</div>
+                                                                    </div>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-medicine">
+                                                                            <label class="form-check-label" for="skill-medicine">
+                                                                                Медицина
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-medicine-value">+0</div>
+                                                                    </div>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-perception">
+                                                                            <label class="form-check-label" for="skill-perception">
+                                                                                Восприятие
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-perception-value">+0</div>
+                                                                    </div>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-survival">
+                                                                            <label class="form-check-label" for="skill-survival">
+                                                                                Выживание
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-survival-value">+0</div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Харизма -->
+                                                                <div class="skill-category">
+                                                                    <h5>Харизма (CHA)</h5>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-deception">
+                                                                            <label class="form-check-label" for="skill-deception">
+                                                                                Обман
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-deception-value">+0</div>
+                                                                    </div>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-intimidation">
+                                                                            <label class="form-check-label" for="skill-intimidation">
+                                                                                Запугивание
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-intimidation-value">+0</div>
+                                                                    </div>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-performance">
+                                                                            <label class="form-check-label" for="skill-performance">
+                                                                                Выступление
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-performance-value">+0</div>
+                                                                    </div>
+                                                                    <div class="skill-item">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input skill-checkbox" type="checkbox" id="skill-persuasion">
+                                                                            <label class="form-check-label" for="skill-persuasion">
+                                                                                Убеждение
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="skill-value" id="skill-persuasion-value">+0</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Инициатива -->
+                                            <div class="row mt-4">
+                                                <div class="col-md-6">
+                                                    <div class="derived-stat-card">
+                                                        <h5><i class="bi bi-lightning-charge"></i> Инициатива</h5>
+                                                        <div class="derived-stat-value" id="initiative-value">+0</div>
+                                                        <small>Рассчитывается от модификатора Ловкости</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="dnd-section">
+                                            <h4><i class="bi bi-info-circle"></i> Информация</h4>
+                                            
+                                            <div class="info-card">
+                                                <h5>Система очков</h5>
+                                                <p>У вас есть <strong>27 очков</strong> для распределения между характеристиками.</p>
+                                                <p>Минимальное значение: <strong>8</strong>, максимальное: <strong>15</strong>.</p>
+                                                
+                                                <table class="points-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Значение</th>
+                                                            <th>Стоимость</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr><td>8</td><td>0</td></tr>
+                                                        <tr><td>9</td><td>1</td></tr>
+                                                        <tr><td>10</td><td>2</td></tr>
+                                                        <tr><td>11</td><td>3</td></tr>
+                                                        <tr><td>12</td><td>4</td></tr>
+                                                        <tr><td>13</td><td>5</td></tr>
+                                                        <tr><td>14</td><td>7</td></tr>
+                                                        <tr><td>15</td><td>9</td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="info-card mt-3">
+                                                <h5>Модификаторы</h5>
+                                                <p>Модификатор рассчитывается по формуле:</p>
+                                                <p class="text-center"><strong>(Характеристика - 10) ÷ 2</strong></p>
+                                                <p>Округление в меньшую сторону.</p>
+                                            </div>
+
+                                            <div class="info-card mt-3">
+                                                <h5>Спасброски</h5>
+                                                <p>Спасброски определяются вашим классом. Отметьте характеристики, по которым ваш класс имеет владение спасброском.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="inventory">
+                            <div class="inventory-container">
+                                <div class="row">
+                                    <!-- Броня -->
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="dnd-section">
+                                            <h4><i class="bi bi-shield"></i> Броня</h4>
+                                            
+                                            <!-- Броня -->
+                                            <div class="mb-3">
+                                                <label for="armorSelect" class="form-label">Броня</label>
+                                                <select class="form-select dnd-select" id="armorSelect">
+                                                    <option value="">Не одето</option>
+                                                    <!-- Броня будет загружена через JavaScript -->
+                                                </select>
+                                                <div id="armorInfo" class="item-info mt-2" style="display: none;">
+                                                    <!-- Информация о броне -->
+                                                </div>
+                                            </div>
+
+                                            <!-- Щит -->
+                                            <div class="mb-3">
+                                                <label for="shieldSelect" class="form-label">Щит</label>
+                                                <select class="form-select dnd-select" id="shieldSelect">
+                                                    <option value="">Не используется</option>
+                                                    <!-- Щиты будут загружены через JavaScript -->
+                                                </select>
+                                                <div id="shieldInfo" class="item-info mt-2" style="display: none;">
+                                                    <!-- Информация о щите -->
+                                                </div>
+                                            </div>
+
+                                            <!-- Класс брони -->
+                                            <div class="derived-stat-card">
+                                                <h5><i class="bi bi-shield-check"></i> Класс брони (КБ)</h5>
+                                                <div class="derived-stat-value" id="armorClassValue">10</div>
+                                                <small>Рассчитывается от брони и ловкости</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Оружие -->
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="dnd-section">
+                                            <h4><i class="bi bi-crosshair"></i> Оружие</h4>
+                                            
+                                            <!-- Одноручное оружие 1 -->
+                                            <div class="mb-3">
+                                                <label for="meleeWeapon1" class="form-label">Одноручное оружие 1</label>
+                                                <select class="form-select dnd-select melee-weapon" id="meleeWeapon1">
+                                                    <option value="">Не экипировано</option>
+                                                    <!-- Оружие будет загружено через JavaScript -->
+                                                </select>
+                                                <div id="meleeWeapon1Info" class="item-info mt-2" style="display: none;">
+                                                    <!-- Информация об оружии -->
+                                                </div>
+                                            </div>
+
+                                            <!-- Одноручное оружие 2 -->
+                                            <div class="mb-3">
+                                                <label for="meleeWeapon2" class="form-label">Одноручное оружие 2</label>
+                                                <select class="form-select dnd-select melee-weapon" id="meleeWeapon2">
+                                                    <option value="">Не экипировано</option>
+                                                </select>
+                                                <div id="meleeWeapon2Info" class="item-info mt-2" style="display: none;">
+                                                    <!-- Информация об оружии -->
+                                                </div>
+                                            </div>
+
+                                            <!-- Двуручное оружие -->
+                                            <div class="mb-3">
+                                                <label for="twoHandedWeapon" class="form-label">Двуручное оружие</label>
+                                                <select class="form-select dnd-select two-handed-weapon" id="twoHandedWeapon">
+                                                    <option value="">Не экипировано</option>
+                                                </select>
+                                                <div id="twoHandedWeaponInfo" class="item-info mt-2" style="display: none;">
+                                                    <!-- Информация об оружии -->
+                                                </div>
+                                            </div>
+
+                                            <!-- Дальнобойное оружие -->
+                                            <div class="mb-3">
+                                                <label for="rangedWeapon" class="form-label">Дальнобойное оружие</label>
+                                                <select class="form-select dnd-select ranged-weapon" id="rangedWeapon">
+                                                    <option value="">Не экипировано</option>
+                                                </select>
+                                                <div id="rangedWeaponInfo" class="item-info mt-2" style="display: none;">
+                                                    <!-- Информация об оружии -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- Простой инвентарь -->
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="dnd-section">
+                                            <h4><i class="bi bi-backpack"></i> Простой инвентарь</h4>
+                                            
+                                            <div class="simple-inventory-container">
+                                                <div class="inventory-controls mb-3">
+                                                    <button id="addInventoryItem" class="btn btn-dnd-secondary btn-sm">
+                                                        <i class="bi bi-plus-circle"></i> Добавить предмет
+                                                    </button>
+                                                    <button id="clearInventory" class="btn btn-dnd-warning btn-sm">
+                                                        <i class="bi bi-trash"></i> Очистить
+                                                    </button>
+                                                </div>
+                                                
+                                                <div id="simpleInventoryList" class="inventory-list">
+                                                    <!-- Список предметов будет добавляться динамически -->
+                                                    <div class="empty-inventory">
+                                                        <i class="bi bi-inbox"></i>
+                                                        <p>Инвентарь пуст</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Кошелек -->
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="dnd-section">
+                                            <h4><i class="bi bi-coin"></i> Кошелек</h4>
+                                            
+                                            <div class="wallet-container">
+                                                <div class="currency-row">
+                                                    <div class="currency-icon pp"></div>
+                                                    <label class="currency-label">Платиновые (ПМ)</label>
+                                                    <input type="number" class="form-control dnd-input currency-input" 
+                                                           id="platinum" value="0" min="0">
+                                                </div>
+                                                
+                                                <div class="currency-row">
+                                                    <div class="currency-icon gp"></div>
+                                                    <label class="currency-label">Золотые (ЗМ)</label>
+                                                    <input type="number" class="form-control dnd-input currency-input" 
+                                                           id="gold" value="0" min="0">
+                                                </div>
+                                                
+                                                <div class="currency-row">
+                                                    <div class="currency-icon ep"></div>
+                                                    <label class="currency-label">Электрумовые (ЭМ)</label>
+                                                    <input type="number" class="form-control dnd-input currency-input" 
+                                                           id="electrum" value="0" min="0">
+                                                </div>
+                                                
+                                                <div class="currency-row">
+                                                    <div class="currency-icon sp"></div>
+                                                    <label class="currency-label">Серебряные (СМ)</label>
+                                                    <input type="number" class="form-control dnd-input currency-input" 
+                                                           id="silver" value="0" min="0">
+                                                </div>
+                                                
+                                                <div class="currency-row">
+                                                    <div class="currency-icon cp"></div>
+                                                    <label class="currency-label">Медные (ММ)</label>
+                                                    <input type="number" class="form-control dnd-input currency-input" 
+                                                           id="copper" value="0" min="0">
+                                                </div>
+
+                                                <!-- Общая стоимость -->
+                                                <div class="total-currency mt-3">
+                                                    <h5>Общая стоимость в золотых:</h5>
+                                                    <div class="total-value" id="totalGoldValue">0 ЗМ</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="status">
+                            <div class="status-container">
+                                <div class="row">
+                                    <!-- Здоровье и хиты -->
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="dnd-section">
+                                            <h4><i class="bi bi-heart"></i> Здоровье и хиты</h4>
+                                            
+                                            <!-- Максимальное здоровье -->
+                                            <div class="mb-3">
+                                                <label for="maxHealth" class="form-label">Максимальное здоровье</label>
+                                                <input type="number" class="form-control dnd-input" id="maxHealth" 
+                                                       value="10" min="1" readonly>
+                                                <div class="form-text">Рассчитывается автоматически</div>
+                                            </div>
+
+                                            <!-- Текущее здоровье -->
+                                            <div class="mb-3">
+                                                <label for="currentHealth" class="form-label">Текущее здоровье</label>
+                                                <input type="number" class="form-control dnd-input" id="currentHealth" 
+                                                       value="10" min="0">
+                                            </div>
+
+                                            <!-- Визуализация здоровья -->
+                                            <div class="health-visualization mb-4">
+                                                <div class="health-bar-container">
+                                                    <div class="health-bar" id="healthBar">
+                                                        <div class="health-fill" id="healthFill" style="width: 100%"></div>
+                                                    </div>
+                                                    <div class="health-text" id="healthText">10/10</div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Кость хитов -->
+                                            <div class="mb-3">
+                                                <label for="hitDice" class="form-label">Кость хитов</label>
+                                                <input type="text" class="form-control dnd-input" id="hitDice" 
+                                                       value="1d6" readonly>
+                                            </div>
+
+                                            <!-- Временные хиты -->
+                                            <div class="mb-3">
+                                                <label for="temporaryHealth" class="form-label">Временные хиты</label>
+                                                <input type="number" class="form-control dnd-input" id="temporaryHealth" 
+                                                       value="0" min="0">
+                                            </div>
+
+                                            <!-- Кнопки управления здоровьем -->
+                                            <div class="health-controls">
+                                                <button id="shortRestBtn" class="btn btn-dnd-secondary btn-sm">
+                                                    <i class="bi bi-moon"></i> Короткий отдых
+                                                </button>
+                                                <button id="longRestBtn" class="btn btn-dnd-primary btn-sm">
+                                                    <i class="bi bi-sun"></i> Длительный отдых
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Класс брони и состояния -->
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="dnd-section">
+                                            <h4><i class="bi bi-shield-check"></i> Защита</h4>
+                                            
+                                            <!-- Класс брони -->
+                                            <div class="derived-stat-card mb-4">
+                                                <h5><i class="bi bi-shield"></i> Класс брони (КБ)</h5>
+                                                <div class="derived-stat-value" id="statusArmorClass">10</div>
+                                                <small>Рассчитывается от брони и ловкости</small>
+                                            </div>
+
+                                            <!-- Инициатива -->
+                                            <div class="derived-stat-card mb-4">
+                                                <h5><i class="bi bi-lightning-charge"></i> Инициатива</h5>
+                                                <div class="derived-stat-value" id="statusInitiative">+0</div>
+                                                <small>Рассчитывается от ловкости</small>
+                                            </div>
+
+                                            <!-- Скорость -->
+                                            <div class="derived-stat-card">
+                                                <h5><i class="bi bi-speedometer2"></i> Скорость</h5>
+                                                <div class="derived-stat-value" id="statusSpeed">30</div>
+                                                <small>футов за ход</small>
+                                            </div>
+                                        </div>
+
+                                        <!-- Состояния -->
+                                        <div class="dnd-section mt-4">
+                                            <h4><i class="bi bi-list-check"></i> Состояния</h4>
+                                            
+                                            <div class="states-container">
+                                                <div class="states-controls mb-3">
+                                                    <select class="form-select dnd-select" id="stateSelect">
+                                                        <option value="">Выберите состояние...</option>
+                                                        <!-- Состояния будут загружены через JavaScript -->
+                                                    </select>
+                                                    <button id="addStateBtn" class="btn btn-dnd-secondary btn-sm mt-2">
+                                                        <i class="bi bi-plus-circle"></i> Добавить состояние
+                                                    </button>
+                                                </div>
+                                                
+                                                <div id="statesList" class="states-list">
+                                                    <!-- Список состояний будет добавляться динамически -->
+                                                    <div class="empty-states">
+                                                        <i class="bi bi-check2-circle"></i>
+                                                        <p>Нет активных состояний</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Спасброски -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="dnd-section">
+                                            <h4><i class="bi bi-shield-exclamation"></i> Спасброски</h4>
+                                            
+                                            <div class="saving-throws-container">
+                                                <div class="row">
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="saving-throw-card" data-save="strength">
+                                                            <div class="save-name">Сила</div>
+                                                            <div class="save-value" id="strengthSave">+0</div>
+                                                            <div class="save-proficiency">
+                                                                <i class="bi bi-shield-check" id="strengthSaveIcon" style="display: none;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="saving-throw-card" data-save="dexterity">
+                                                            <div class="save-name">Ловкость</div>
+                                                            <div class="save-value" id="dexteritySave">+0</div>
+                                                            <div class="save-proficiency">
+                                                                <i class="bi bi-shield-check" id="dexteritySaveIcon" style="display: none;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="saving-throw-card" data-save="constitution">
+                                                            <div class="save-name">Телосложение</div>
+                                                            <div class="save-value" id="constitutionSave">+0</div>
+                                                            <div class="save-proficiency">
+                                                                <i class="bi bi-shield-check" id="constitutionSaveIcon" style="display: none;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="saving-throw-card" data-save="intelligence">
+                                                            <div class="save-name">Интеллект</div>
+                                                            <div class="save-value" id="intelligenceSave">+0</div>
+                                                            <div class="save-proficiency">
+                                                                <i class="bi bi-shield-check" id="intelligenceSaveIcon" style="display: none;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="saving-throw-card" data-save="wisdom">
+                                                            <div class="save-name">Мудрость</div>
+                                                            <div class="save-value" id="wisdomSave">+0</div>
+                                                            <div class="save-proficiency">
+                                                                <i class="bi bi-shield-check" id="wisdomSaveIcon" style="display: none;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="saving-throw-card" data-save="charisma">
+                                                            <div class="save-name">Харизма</div>
+                                                            <div class="save-value" id="charismaSave">+0</div>
+                                                            <div class="save-proficiency">
+                                                                <i class="bi bi-shield-check" id="charismaSaveIcon" style="display: none;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="notes">
+                            <div class="text-center py-5">
+                                <h4>Раздел заметок</h4>
+                                <p>Здесь будут заметки игрока</p>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="features">
+                            <div class="features-container">
+                                <div class="row">
+                                    <!-- Особенности расы -->
+                                    <div class="col-lg-4 mb-4">
+                                        <div class="dnd-section">
+                                            <h4><i class="bi bi-person-badge"></i> Особенности расы</h4>
+                                            <div id="raceFeatures" class="features-list">
+                                                <div class="empty-features">
+                                                    <i class="bi bi-info-circle"></i>
+                                                    <p>Выберите расу, чтобы увидеть её особенности</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Особенности класса -->
+                                    <div class="col-lg-4 mb-4">
+                                        <div class="dnd-section">
+                                            <h4><i class="bi bi-shield"></i> Особенности класса</h4>
+                                            <div id="classFeatures" class="features-list">
+                                                <div class="empty-features">
+                                                    <i class="bi bi-info-circle"></i>
+                                                    <p>Выберите класс, чтобы увидеть его особенности</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Особенности подкласса -->
+                                    <div class="col-lg-4 mb-4">
+                                        <div class="dnd-section">
+                                            <h4><i class="bi bi-stars"></i> Особенности подкласса</h4>
+                                            <div id="subclassFeatures" class="features-list">
+                                                <div class="empty-features">
+                                                    <i class="bi bi-info-circle"></i>
+                                                    <p>Выберите подкласс, чтобы увидеть его особенности</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Все особенности по уровням -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="dnd-section">
+                                            <h4><i class="bi bi-list-ul"></i> Все особенности по уровням</h4>
+                                            
+                                            <div class="level-features-container">
+                                                <div id="allFeaturesByLevel" class="all-features-list">
+                                                    <div class="empty-features">
+                                                        <i class="bi bi-card-checklist"></i>
+                                                        <p>Выберите расу и класс, чтобы увидеть все особенности</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="spells">
+                            <div class="text-center py-5">
+                                <h4>Раздел заклинаний</h4>
+                                <p>Здесь будут заклинания персонажа</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Кнопки управления формой -->
+                    <div class="dnd-form-actions">
+                        <button id="saveCharacterBtn" class="btn btn-dnd-success">
+                            <i class="bi bi-check-circle"></i> Сохранить персонажа
+                        </button>
+                        <button id="cancelCreateBtn" class="btn btn-dnd-secondary">
+                            <i class="bi bi-x-circle"></i> Отмена
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вкладка моих персонажей -->
+            <div id="myCharactersTab" class="content-tab">
+                <div class="dnd-characters-container">
+                    <div class="dnd-section-header">
+                        <h2><i class="bi bi-person-badge"></i> Мои персонажи</h2>
+                        <p>Управляйте вашими созданными персонажами</p>
+                    </div>
+                    
+                    <div id="charactersList" class="row">
+                        <!-- Список персонажей будет генерироваться через JavaScript -->
+                        <div class="col-12">
+                            <div class="dnd-empty-state">
+                                <i class="bi bi-person-x"></i>
+                                <h4>Персонажей пока нет</h4>
+                                <p>Создайте вашего первого персонажа, чтобы начать приключение!</p>
+                                <button class="btn btn-dnd-primary" id="createFirstCharacterBtn">
+                                    Создать первого персонажа
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Модальные окна будут добавляться по мере необходимости -->
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Наши скрипты -->
+    <script src="js/calculators.js"></script>
+    <script src="js/characterManager.js"></script>
+    <script src="js/formManager.js"></script>
+    <script src="js/attributesManager.js"></script>
+    <script src="js/inventoryManager.js"></script>
+    <script src="js/statusManager.js"></script>
+    <script src="js/featuresManager.js"></script>
+    <script src="js/raceBonusManager.js"></script>
+    <script src="js/syncManager.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
