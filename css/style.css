@@ -1665,3 +1665,444 @@ body {
     color: var(--dnd-light) !important;
     box-shadow: 0 0 0 0.2rem rgba(184, 134, 11, 0.25) !important;
 }
+/* Стили для раздела заметок */
+.notes-container {
+    padding: 1rem 0;
+}
+
+/* Категории заметок */
+.notes-categories {
+    background: rgba(44, 24, 16, 0.8);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.category-btn {
+    background: rgba(245, 230, 211, 0.05);
+    border: 1px solid var(--dnd-secondary);
+    border-radius: 6px;
+    color: var(--dnd-light);
+    padding: 0.8rem 1rem;
+    text-align: left;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.category-btn:hover {
+    background: rgba(245, 230, 211, 0.1);
+    border-color: var(--dnd-gold);
+    transform: translateX(5px);
+}
+
+.category-btn.active {
+    background: linear-gradient(135deg, var(--dnd-primary) 0%, var(--dnd-secondary) 100%);
+    border-color: var(--dnd-gold);
+    color: var(--dnd-light);
+}
+
+.category-controls {
+    text-align: center;
+}
+
+/* Заголовок и действия заметок */
+.notes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--dnd-secondary);
+}
+
+.notes-header h4 {
+    color: var(--dnd-gold);
+    margin: 0;
+    font-family: 'Cinzel', serif;
+}
+
+.notes-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Редактор заметок */
+.note-editor-container {
+    background: rgba(44, 24, 16, 0.8);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.note-editor {
+    width: 100%;
+    min-height: 300px;
+    background: transparent;
+    border: none;
+    color: var(--dnd-light);
+    padding: 1.5rem;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    resize: vertical;
+    outline: none;
+}
+
+.note-editor::placeholder {
+    color: var(--dnd-secondary);
+    font-style: italic;
+}
+
+.note-editor:focus {
+    background: rgba(245, 230, 211, 0.05);
+}
+
+/* Панель форматирования */
+.formatting-toolbar {
+    background: rgba(210, 105, 30, 0.2);
+    border-top: 1px solid var(--dnd-secondary);
+    padding: 0.5rem 1rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.format-btn {
+    background: transparent;
+    border: 1px solid var(--dnd-secondary);
+    border-radius: 4px;
+    color: var(--dnd-light);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.format-btn:hover {
+    background: var(--dnd-primary);
+    border-color: var(--dnd-gold);
+    color: var(--dnd-gold);
+}
+
+.format-btn.active {
+    background: var(--dnd-gold);
+    border-color: var(--dnd-gold);
+    color: var(--dnd-dark);
+}
+
+.toolbar-separator {
+    width: 1px;
+    height: 20px;
+    background: var(--dnd-secondary);
+    margin: 0 0.5rem;
+}
+
+/* Список сохраненных заметок */
+.saved-notes {
+    margin-top: 2rem;
+}
+
+.saved-notes h5 {
+    color: var(--dnd-gold);
+    margin-bottom: 1rem;
+    font-family: 'Cinzel', serif;
+}
+
+.notes-list {
+    background: rgba(44, 24, 16, 0.8);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 8px;
+    padding: 1rem;
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.empty-notes {
+    text-align: center;
+    color: var(--dnd-secondary);
+    padding: 3rem 1rem;
+}
+
+.empty-notes i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.note-item {
+    background: rgba(245, 230, 211, 0.05);
+    border: 1px solid var(--dnd-secondary);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.note-item:hover {
+    border-color: var(--dnd-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.note-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.8rem;
+}
+
+.note-item-title {
+    color: var(--dnd-gold);
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0;
+    flex: 1;
+}
+
+.note-item-date {
+    color: var(--dnd-secondary);
+    font-size: 0.8rem;
+    white-space: nowrap;
+    margin-left: 1rem;
+}
+
+.note-item-content {
+    color: var(--dnd-light);
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.note-item-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.note-action-btn {
+    background: transparent;
+    border: 1px solid var(--dnd-secondary);
+    border-radius: 4px;
+    color: var(--dnd-light);
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.note-action-btn:hover {
+    transform: scale(1.05);
+}
+
+.btn-edit-note {
+    background: rgba(30, 144, 255, 0.2);
+    border-color: #1e90ff;
+}
+
+.btn-edit-note:hover {
+    background: #1e90ff;
+    color: white;
+}
+
+.btn-delete-note {
+    background: rgba(139, 0, 0, 0.2);
+    border-color: var(--dnd-danger);
+}
+
+.btn-delete-note:hover {
+    background: var(--dnd-danger);
+    color: white;
+}
+
+/* Быстрые заметки */
+.quick-notes-container {
+    margin-top: 1rem;
+}
+
+.quick-note-card {
+    background: rgba(44, 24, 16, 0.8);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.quick-note-card:hover {
+    border-color: var(--dnd-gold);
+    transform: translateY(-3px);
+}
+
+.quick-note-card h6 {
+    color: var(--dnd-gold);
+    margin-bottom: 1rem;
+    font-family: 'Cinzel', serif;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quick-note {
+    width: 100%;
+    min-height: 120px;
+    background: rgba(245, 230, 211, 0.05);
+    border: 1px solid var(--dnd-secondary);
+    border-radius: 6px;
+    color: var(--dnd-light);
+    padding: 0.8rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    resize: vertical;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.quick-note:focus {
+    border-color: var(--dnd-gold);
+    background: rgba(245, 230, 211, 0.1);
+}
+
+.quick-note::placeholder {
+    color: var(--dnd-secondary);
+    font-style: italic;
+}
+
+/* Модальное окно для новой категории */
+.modal-dnd .modal-content {
+    background: rgba(44, 24, 16, 0.95);
+    border: 3px solid var(--dnd-gold);
+    border-radius: 15px;
+    color: var(--dnd-light);
+}
+
+.modal-dnd .modal-header {
+    border-bottom: 2px solid var(--dnd-secondary);
+    background: linear-gradient(135deg, var(--dnd-dark) 0%, var(--dnd-primary) 100%);
+}
+
+.modal-dnd .modal-title {
+    color: var(--dnd-gold);
+    font-family: 'Cinzel', serif;
+}
+
+.modal-dnd .modal-footer {
+    border-top: 2px solid var(--dnd-secondary);
+}
+
+/* Адаптивность для заметок */
+@media (max-width: 992px) {
+    .notes-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .notes-actions {
+        align-self: flex-end;
+    }
+    
+    .category-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .category-btn {
+        flex: 1;
+        min-width: 120px;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .note-editor {
+        min-height: 200px;
+    }
+    
+    .notes-list {
+        min-height: 150px;
+        max-height: 300px;
+    }
+    
+    .note-item-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .note-item-date {
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+    
+    .quick-note-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Анимации для заметок */
+.note-fade-in {
+    animation: noteFadeIn 0.5s ease;
+}
+
+@keyframes noteFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.note-saved {
+    animation: noteSaved 1s ease;
+}
+
+@keyframes noteSaved {
+    0% { background: rgba(0, 100, 0, 0.3); }
+    100% { background: rgba(245, 230, 211, 0.05); }
+}
+
+/* Стили для форматированного текста */
+.note-formatted {
+    line-height: 1.6;
+}
+
+.note-formatted strong {
+    color: var(--dnd-gold);
+    font-weight: bold;
+}
+
+.note-formatted em {
+    font-style: italic;
+    color: var(--dnd-light);
+}
+
+.note-formatted u {
+    text-decoration: underline;
+}
+
+.note-formatted ul, .note-formatted ol {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.note-formatted li {
+    margin: 0.3rem 0;
+}
