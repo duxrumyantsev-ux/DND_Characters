@@ -1082,9 +1082,135 @@
                         </div>
                         
                         <div class="tab-pane fade" id="notes">
-                            <div class="text-center py-5">
-                                <h4>Раздел заметок</h4>
-                                <p>Здесь будут заметки игрока</p>
+                            <div class="notes-container">
+                                <div class="row">
+                                    <!-- Панель категорий заметок -->
+                                    <div class="col-lg-3 mb-4">
+                                        <div class="dnd-section">
+                                            <h4><i class="bi bi-journal"></i> Категории заметок</h4>
+                                            
+                                            <div class="notes-categories">
+                                                <div class="category-list">
+                                                    <button class="category-btn active" data-category="appearance">
+                                                        <i class="bi bi-person"></i> Внешность
+                                                    </button>
+                                                    <button class="category-btn" data-category="personality">
+                                                        <i class="bi bi-heart"></i> Личность
+                                                    </button>
+                                                    <button class="category-btn" data-category="background">
+                                                        <i class="bi bi-book"></i> Предыстория
+                                                    </button>
+                                                    <button class="category-btn" data-category="relationships">
+                                                        <i class="bi bi-people"></i> Отношения
+                                                    </button>
+                                                    <button class="category-btn" data-category="organizations">
+                                                        <i class="bi bi-building"></i> Организации
+                                                    </button>
+                                                    <button class="category-btn" data-category="quests">
+                                                        <i class="bi bi-signpost"></i> Квесты
+                                                    </button>
+                                                    <button class="category-btn" data-category="locations">
+                                                        <i class="bi bi-geo"></i> Места
+                                                    </button>
+                                                    <button class="category-btn" data-category="other">
+                                                        <i class="bi bi-sticky"></i> Разное
+                                                    </button>
+                                                </div>
+                                                
+                                                <div class="category-controls mt-3">
+                                                    <button id="addCustomCategory" class="btn btn-dnd-secondary btn-sm">
+                                                        <i class="bi bi-plus-circle"></i> Новая категория
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Редактор заметок -->
+                                    <div class="col-lg-9 mb-4">
+                                        <div class="dnd-section">
+                                            <div class="notes-header">
+                                                <h4 id="currentCategoryTitle">Внешность</h4>
+                                                <div class="notes-actions">
+                                                    <button id="saveNote" class="btn btn-dnd-success btn-sm">
+                                                        <i class="bi bi-check-circle"></i> Сохранить
+                                                    </button>
+                                                    <button id="clearNote" class="btn btn-dnd-warning btn-sm">
+                                                        <i class="bi bi-eraser"></i> Очистить
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <!-- Редактор заметки -->
+                                            <div class="note-editor-container">
+                                                <textarea id="noteEditor" class="note-editor" placeholder="Начните писать заметку..."></textarea>
+                                                
+                                                <!-- Панель форматирования (упрощенная) -->
+                                                <div class="formatting-toolbar">
+                                                    <button class="format-btn" data-format="bold" title="Жирный">
+                                                        <i class="bi bi-type-bold"></i>
+                                                    </button>
+                                                    <button class="format-btn" data-format="italic" title="Курсив">
+                                                        <i class="bi bi-type-italic"></i>
+                                                    </button>
+                                                    <button class="format-btn" data-format="underline" title="Подчеркивание">
+                                                        <i class="bi bi-type-underline"></i>
+                                                    </button>
+                                                    <div class="toolbar-separator"></div>
+                                                    <button class="format-btn" data-format="list-ul" title="Маркированный список">
+                                                        <i class="bi bi-list-ul"></i>
+                                                    </button>
+                                                    <button class="format-btn" data-format="list-ol" title="Нумерованный список">
+                                                        <i class="bi bi-list-ol"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <!-- Список сохраненных заметок в категории -->
+                                            <div class="saved-notes mt-4">
+                                                <h5><i class="bi bi-archive"></i> Сохраненные заметки</h5>
+                                                <div id="notesList" class="notes-list">
+                                                    <div class="empty-notes">
+                                                        <i class="bi bi-journal-text"></i>
+                                                        <p>Нет сохраненных заметок в этой категории</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Быстрые заметки -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="dnd-section">
+                                            <h4><i class="bi bi-lightning"></i> Быстрые заметки</h4>
+                                            
+                                            <div class="quick-notes-container">
+                                                <div class="row">
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="quick-note-card">
+                                                            <h6><i class="bi bi-shield"></i> Слабые стороны</h6>
+                                                            <textarea class="quick-note" data-type="weaknesses" placeholder="Страхи, уязвимости, недостатки..."></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="quick-note-card">
+                                                            <h6><i class="bi bi-star"></i> Сильные стороны</h6>
+                                                            <textarea class="quick-note" data-type="strengths" placeholder="Таланты, умения, достоинства..."></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="quick-note-card">
+                                                            <h6><i class="bi bi-bullseye"></i> Цели</h6>
+                                                            <textarea class="quick-note" data-type="goals" placeholder="Личные цели и стремления..."></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
@@ -1208,9 +1334,10 @@
     <script src="js/formManager.js"></script>
     <script src="js/attributesManager.js"></script>
     <script src="js/inventoryManager.js"></script>
-    <script src="js/statusManager.js"></script>
     <script src="js/featuresManager.js"></script>
     <script src="js/raceBonusManager.js"></script>
+    <script src="js/statusManager.js"></script>
+    <script src="js/notesManager.js"></script> <!-- ДОБАВЛЯЕМ менеджер заметок -->
     <script src="js/syncManager.js"></script>
     <script src="js/main.js"></script>
 </body>
