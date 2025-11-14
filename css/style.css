@@ -1,0 +1,1667 @@
+/* Основные стили для D&D тематики */
+:root {
+    --dnd-primary: #8B4513;
+    --dnd-secondary: #D2691E;
+    --dnd-dark: #2C1810;
+    --dnd-light: #F5E6D3;
+    --dnd-gold: #B8860B;
+    --dnd-silver: #C0C0C0;
+    --dnd-danger: #8B0000;
+    --dnd-success: #006400;
+    --dnd-warning: #FF8C00;
+    --dnd-info: #1E90FF;
+}
+
+body {
+    font-family: 'Cinzel', serif;
+    background: linear-gradient(135deg, #2C1810 0%, #5D4037 100%);
+    color: var(--dnd-light);
+    min-height: 100vh;
+}
+
+.dnd-container {
+    min-height: 100vh;
+    background: 
+        linear-gradient(135deg, rgba(44, 24, 16, 0.9) 0%, rgba(93, 64, 55, 0.9) 100%),
+        url('../assets/images/parchment-texture.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+/* Добавляем fallback если изображение не загрузилось */
+.dnd-container:before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(135deg, #2C1810 0%, #5D4037 100%),
+        repeating-linear-gradient(45deg, rgba(139, 69, 19, 0.1) 0px, rgba(139, 69, 19, 0.1) 1px, transparent 1px, transparent 10px);
+    z-index: -1;
+}
+
+/* Шапка */
+.dnd-header {
+    background: linear-gradient(135deg, var(--dnd-dark) 0%, var(--dnd-primary) 100%);
+    border-bottom: 3px solid var(--dnd-gold);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.dnd-title {
+    font-family: 'MedievalSharp', cursive;
+    color: var(--dnd-gold);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.dnd-nav .btn {
+    margin-left: 0.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Кнопки в D&D стиле */
+.btn-dnd-primary {
+    background: linear-gradient(135deg, var(--dnd-primary) 0%, var(--dnd-secondary) 100%);
+    border: 2px solid var(--dnd-gold);
+    color: var(--dnd-light);
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-dnd-primary:hover {
+    background: linear-gradient(135deg, var(--dnd-secondary) 0%, var(--dnd-primary) 100%);
+    border-color: var(--dnd-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.4);
+}
+
+.btn-dnd-secondary {
+    background: transparent;
+    border: 2px solid var(--dnd-secondary);
+    color: var(--dnd-light);
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-dnd-secondary:hover {
+    background: var(--dnd-secondary);
+    border-color: var(--dnd-light);
+    transform: translateY(-2px);
+}
+
+.btn-dnd-success {
+    background: linear-gradient(135deg, var(--dnd-success) 0%, #228B22 100%);
+    border: 2px solid #32CD32;
+    color: var(--dnd-light);
+    font-weight: bold;
+}
+
+/* Основное содержимое */
+.dnd-main-content {
+    padding: 2rem 0;
+    min-height: calc(100vh - 120px);
+}
+
+.content-tab {
+    display: none;
+}
+
+.content-tab.active {
+    display: block;
+}
+
+/* Карточки */
+.dnd-welcome-card {
+    background: rgba(44, 24, 16, 0.9);
+    border: 3px solid var(--dnd-gold);
+    border-radius: 15px;
+    padding: 3rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+}
+
+.dnd-feature-card {
+    background: rgba(210, 105, 30, 0.1);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.dnd-feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(210, 105, 30, 0.3);
+}
+
+.dnd-feature-card i {
+    font-size: 3rem;
+    color: var(--dnd-gold);
+    margin-bottom: 1rem;
+}
+
+.dnd-dice-icon {
+    font-size: 4rem;
+    color: var(--dnd-gold);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Форма создания персонажа */
+.dnd-form-container {
+    background: rgba(44, 24, 16, 0.95);
+    border: 3px solid var(--dnd-gold);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+}
+
+.dnd-form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--dnd-secondary);
+    padding-bottom: 1rem;
+}
+
+.dnd-form-header h2 {
+    color: var(--dnd-gold);
+    font-family: 'MedievalSharp', cursive;
+}
+
+/* Навигация формы */
+.dnd-form-nav {
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.dnd-form-nav .nav-link {
+    color: var(--dnd-light);
+    border: 2px solid transparent;
+    margin: 0 0.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.dnd-form-nav .nav-link.active {
+    background: linear-gradient(135deg, var(--dnd-primary) 0%, var(--dnd-secondary) 100%);
+    border-color: var(--dnd-gold);
+    color: var(--dnd-light);
+}
+
+.dnd-form-nav .nav-link:hover {
+    border-color: var(--dnd-secondary);
+}
+
+/* Поля ввода */
+.dnd-input, .dnd-select {
+    background: rgba(245, 230, 211, 0.1);
+    border: 2px solid var(--dnd-secondary);
+    color: var(--dnd-light);
+    border-radius: 8px;
+}
+
+.dnd-input:focus, .dnd-select:focus {
+    background: rgba(245, 230, 211, 0.2);
+    border-color: var(--dnd-gold);
+    color: var(--dnd-light);
+    box-shadow: 0 0 0 0.2rem rgba(184, 134, 11, 0.25);
+}
+
+.form-label {
+    color: var(--dnd-gold);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+/* Фото персонажа */
+.character-photo-container {
+    width: 200px;
+    height: 250px;
+    border: 3px solid var(--dnd-gold);
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(245, 230, 211, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.character-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Уровень и опыт */
+.level-container {
+    text-align: center;
+}
+
+.level-circle {
+    width: 80px;
+    height: 80px;
+    border: 4px solid var(--dnd-gold);
+    border-radius: 50%;
+    background: var(--dnd-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--dnd-light);
+    margin: 0 auto 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.experience-bar {
+    width: 100%;
+    height: 20px;
+    background: rgba(245, 230, 211, 0.2);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.exp-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--dnd-secondary) 0%, var(--dnd-gold) 100%);
+    border-radius: 8px;
+    transition: width 0.5s ease;
+}
+
+.exp-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--dnd-light);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Действия формы */
+.dnd-form-actions {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--dnd-secondary);
+    text-align: center;
+}
+
+.dnd-form-actions .btn {
+    margin: 0 0.5rem;
+    min-width: 150px;
+}
+
+/* Список персонажей */
+.dnd-characters-container {
+    background: rgba(44, 24, 16, 0.95);
+    border: 3px solid var(--dnd-gold);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+}
+
+.dnd-section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--dnd-secondary);
+    padding-bottom: 1rem;
+}
+
+.dnd-section-header h2 {
+    color: var(--dnd-gold);
+    font-family: 'MedievalSharp', cursive;
+}
+
+.dnd-empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--dnd-light);
+}
+
+.dnd-empty-state i {
+    font-size: 4rem;
+    color: var(--dnd-secondary);
+    margin-bottom: 1rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .dnd-title {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+    
+    .dnd-nav {
+        text-align: center;
+        margin-top: 1rem;
+    }
+    
+    .dnd-nav .btn {
+        margin: 0.25rem;
+        display: block;
+        width: 100%;
+    }
+    
+    .dnd-welcome-card {
+        padding: 1.5rem;
+    }
+    
+    .dnd-form-nav .nav-link {
+        margin: 0.25rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Специальные классы для D&D элементов */
+.dnd-script {
+    font-family: 'UnifrakturMaguntia', cursive;
+}
+
+.dnd-rune {
+    color: var(--dnd-gold);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Стили для полей формы */
+.input-group-text {
+    background: var(--dnd-secondary);
+    border: 2px solid var(--dnd-gold);
+    color: var(--dnd-light);
+    font-weight: bold;
+}
+
+/* Кастомные чекбоксы и радиокнопки */
+.form-check-input:checked {
+    background-color: var(--dnd-primary);
+    border-color: var(--dnd-gold);
+}
+
+.form-check-label {
+    color: var(--dnd-light);
+}
+/* Стили для раздела характеристик */
+.attributes-container {
+    padding: 1rem 0;
+}
+
+.points-info {
+    background: linear-gradient(135deg, rgba(139, 69, 19, 0.3) 0%, rgba(210, 105, 30, 0.3) 100%);
+    border: 2px solid var(--dnd-gold);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.points-label {
+    color: var(--dnd-light);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.points-value {
+    background: var(--dnd-primary);
+    color: var(--dnd-gold);
+    font-weight: bold;
+    font-size: 1.3rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    margin-left: 0.5rem;
+    border: 2px solid var(--dnd-gold);
+}
+
+/* Карточки характеристик */
+.attribute-card {
+    background: rgba(44, 24, 16, 0.8);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 12px;
+    padding: 1.2rem;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.attribute-card:hover {
+    border-color: var(--dnd-gold);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(184, 134, 11, 0.2);
+}
+
+.attribute-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.attribute-score {
+    margin-right: 1.2rem;
+}
+
+.attribute-input {
+    width: 70px;
+    height: 70px;
+    border: 3px solid var(--dnd-gold);
+    border-radius: 50%;
+    background: var(--dnd-dark);
+    color: var(--dnd-light);
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.attribute-input:focus {
+    border-color: var(--dnd-light);
+    box-shadow: 0 0 0 0.3rem rgba(184, 134, 11, 0.3);
+    outline: none;
+}
+
+.attribute-input:invalid {
+    border-color: var(--dnd-danger);
+}
+
+.attribute-info {
+    flex: 1;
+}
+
+.attribute-info h5 {
+    color: var(--dnd-gold);
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+    font-family: 'Cinzel', serif;
+}
+
+.attribute-modifier {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--dnd-light);
+    background: linear-gradient(135deg, var(--dnd-primary) 0%, var(--dnd-secondary) 100%);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--dnd-gold);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.attribute-controls {
+    border-top: 1px solid var(--dnd-secondary);
+    padding-top: 1rem;
+}
+
+.attribute-check {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    padding: 0.3rem 0;
+    color: var(--dnd-light);
+}
+
+.check-value {
+    background: var(--dnd-dark);
+    padding: 0.2rem 0.8rem;
+    border-radius: 15px;
+    border: 1px solid var(--dnd-secondary);
+    font-weight: bold;
+    min-width: 45px;
+    text-align: center;
+}
+
+/* Производные характеристики */
+.derived-stat-card {
+    background: rgba(210, 105, 30, 0.2);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    text-align: center;
+}
+
+.derived-stat-card h5 {
+    color: var(--dnd-gold);
+    margin-bottom: 0.8rem;
+    font-family: 'Cinzel', serif;
+}
+
+.derived-stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--dnd-light);
+    background: var(--dnd-primary);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.8rem;
+    border: 3px solid var(--dnd-gold);
+}
+
+.derived-stat-card small {
+    color: var(--dnd-light);
+    opacity: 0.8;
+}
+
+/* Информационные карточки */
+.info-card {
+    background: rgba(245, 230, 211, 0.1);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.info-card h5 {
+    color: var(--dnd-gold);
+    border-bottom: 1px solid var(--dnd-secondary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Cinzel', serif;
+}
+
+.info-card p {
+    color: var(--dnd-light);
+    margin-bottom: 0.8rem;
+}
+
+/* Таблица стоимости очков */
+.points-table {
+    width: 100%;
+    background: rgba(44, 24, 16, 0.8);
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.points-table th,
+.points-table td {
+    padding: 0.6rem;
+    text-align: center;
+    border: 1px solid var(--dnd-secondary);
+}
+
+.points-table th {
+    background: var(--dnd-primary);
+    color: var(--dnd-gold);
+    font-weight: bold;
+}
+
+.points-table td {
+    color: var(--dnd-light);
+    background: rgba(245, 230, 211, 0.05);
+}
+
+.points-table tr:nth-child(even) td {
+    background: rgba(245, 230, 211, 0.1);
+}
+
+/* Кнопка предупреждения */
+.btn-dnd-warning {
+    background: linear-gradient(135deg, var(--dnd-warning) 0%, #FFA500 100%);
+    border: 2px solid #FF8C00;
+    color: var(--dnd-dark);
+    font-weight: bold;
+}
+
+.btn-dnd-warning:hover {
+    background: linear-gradient(135deg, #FF8C00 0%, var(--dnd-warning) 100%);
+    border-color: var(--dnd-light);
+    color: var(--dnd-dark);
+}
+
+/* Чекбоксы спасбросков */
+.save-proficiency {
+    transform: scale(1.2);
+}
+
+.save-proficiency:checked {
+    background-color: var(--dnd-gold);
+    border-color: var(--dnd-gold);
+}
+
+.form-check-label {
+    color: var(--dnd-light);
+    margin-left: 0.5rem;
+}
+
+/* Адаптивность для характеристик */
+@media (max-width: 768px) {
+    .attribute-input {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .attribute-modifier {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .points-info .row {
+        text-align: center;
+    }
+    
+    .points-info .text-end {
+        text-align: center !important;
+        margin-top: 1rem;
+    }
+}
+/* Стили для раздела инвентаря */
+.inventory-container {
+    padding: 1rem 0;
+}
+
+/* Карточки информации о предметах */
+.item-info {
+    background: rgba(245, 230, 211, 0.1);
+    border: 1px solid var(--dnd-secondary);
+    border-radius: 8px;
+    padding: 1rem;
+    font-size: 0.9rem;
+}
+
+.item-info h6 {
+    color: var(--dnd-gold);
+    margin-bottom: 0.5rem;
+    font-family: 'Cinzel', serif;
+}
+
+.item-property {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.3rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid rgba(210, 105, 30, 0.3);
+}
+
+.item-property:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.property-name {
+    color: var(--dnd-light);
+    font-weight: bold;
+}
+
+.property-value {
+    color: var(--dnd-gold);
+}
+
+/* Простой инвентарь */
+.simple-inventory-container {
+    min-height: 200px;
+}
+
+.inventory-controls {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.inventory-list {
+    background: rgba(44, 24, 16, 0.8);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 8px;
+    padding: 1rem;
+    min-height: 150px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.empty-inventory {
+    text-align: center;
+    color: var(--dnd-secondary);
+    padding: 2rem;
+}
+
+.empty-inventory i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.inventory-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    background: rgba(245, 230, 211, 0.05);
+    border: 1px solid var(--dnd-secondary);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.inventory-item:hover {
+    background: rgba(245, 230, 211, 0.1);
+    border-color: var(--dnd-gold);
+}
+
+.inventory-item-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.inventory-item-input {
+    background: transparent;
+    border: none;
+    color: var(--dnd-light);
+    flex: 1;
+    padding: 0.2rem 0.5rem;
+}
+
+.inventory-item-input:focus {
+    outline: none;
+    background: rgba(245, 230, 211, 0.1);
+    border-radius: 3px;
+}
+
+.inventory-item-actions {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.btn-inventory-action {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-remove-item {
+    background: var(--dnd-danger);
+    color: white;
+}
+
+.btn-remove-item:hover {
+    background: #a00;
+}
+
+/* Кошелек */
+.wallet-container {
+    background: rgba(245, 230, 211, 0.05);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+}
+
+.currency-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(210, 105, 30, 0.3);
+}
+
+.currency-row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.currency-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border: 2px solid;
+}
+
+.currency-icon.pp {
+    background: linear-gradient(135deg, #e5e4e2 0%, #b8b8b8 100%);
+    border-color: #a8a8a8;
+    color: #333;
+}
+
+.currency-icon.gp {
+    background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
+    border-color: #daa520;
+    color: #333;
+}
+
+.currency-icon.ep {
+    background: linear-gradient(135deg, #b5b5b5 0%, #8b7355 100%);
+    border-color: #8b7355;
+    color: #333;
+}
+
+.currency-icon.sp {
+    background: linear-gradient(135deg, #c0c0c0 0%, #808080 100%);
+    border-color: #a9a9a9;
+    color: #333;
+}
+
+.currency-icon.cp {
+    background: linear-gradient(135deg, #cd7f32 0%, #8c4a1f 100%);
+    border-color: #8c4a1f;
+    color: #fff;
+}
+
+.currency-label {
+    flex: 1;
+    color: var(--dnd-light);
+    font-weight: bold;
+    margin: 0;
+}
+
+.currency-input {
+    width: 100px;
+    text-align: center;
+    margin-left: 1rem;
+}
+
+.total-currency {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 2px solid var(--dnd-secondary);
+}
+
+.total-currency h5 {
+    color: var(--dnd-gold);
+    margin-bottom: 0.5rem;
+    font-family: 'Cinzel', serif;
+}
+
+.total-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--dnd-light);
+    background: var(--dnd-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    border: 2px solid var(--dnd-gold);
+    display: inline-block;
+}
+
+/* Стили для оружия и брони */
+.weapon-damage {
+    display: inline-block;
+    background: var(--dnd-dark);
+    padding: 0.2rem 0.5rem;
+    border-radius: 15px;
+    border: 1px solid var(--dnd-secondary);
+    font-family: 'Courier New', monospace;
+    color: var(--dnd-light);
+}
+
+.damage-type {
+    display: inline-block;
+    background: var(--dnd-danger);
+    color: white;
+    padding: 0.1rem 0.4rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+}
+
+.weapon-properties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.5rem;
+}
+
+.weapon-property {
+    background: rgba(184, 134, 11, 0.2);
+    color: var(--dnd-gold);
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    border: 1px solid var(--dnd-gold);
+}
+
+/* Адаптивность для инвентаря */
+@media (max-width: 768px) {
+    .currency-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .currency-input {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+    
+    .inventory-controls {
+        justify-content: center;
+    }
+    
+    .inventory-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .inventory-item-actions {
+        margin-top: 0.5rem;
+        align-self: flex-end;
+    }
+}
+/* Стили для раздела состояний */
+.status-container {
+    padding: 1rem 0;
+}
+
+/* Визуализация здоровья */
+.health-visualization {
+    text-align: center;
+}
+
+.health-bar-container {
+    position: relative;
+    margin: 1rem 0;
+}
+
+.health-bar {
+    width: 100%;
+    height: 30px;
+    background: rgba(245, 230, 211, 0.2);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.health-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--dnd-danger) 0%, var(--dnd-success) 100%);
+    border-radius: 13px;
+    transition: width 0.5s ease;
+    position: relative;
+}
+
+.health-fill:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.health-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    color: var(--dnd-light);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    font-size: 1.1rem;
+}
+
+/* Управление здоровьем */
+.health-controls {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.health-controls .btn {
+    flex: 1;
+    max-width: 150px;
+}
+
+/* Состояния */
+.states-container {
+    margin-top: 1rem;
+}
+
+.states-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.states-list {
+    background: rgba(44, 24, 16, 0.8);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 8px;
+    padding: 1rem;
+    min-height: 100px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.empty-states {
+    text-align: center;
+    color: var(--dnd-secondary);
+    padding: 2rem;
+}
+
+.empty-states i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.state-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem;
+    margin-bottom: 0.5rem;
+    background: rgba(245, 230, 211, 0.05);
+    border: 1px solid var(--dnd-secondary);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.state-item:hover {
+    background: rgba(245, 230, 211, 0.1);
+    border-color: var(--dnd-gold);
+}
+
+.state-item.buff {
+    border-left: 4px solid var(--dnd-success);
+}
+
+.state-item.debuff {
+    border-left: 4px solid var(--dnd-danger);
+}
+
+.state-item.neutral {
+    border-left: 4px solid var(--dnd-secondary);
+}
+
+.state-info {
+    flex: 1;
+}
+
+.state-name {
+    font-weight: bold;
+    color: var(--dnd-light);
+    margin-bottom: 0.2rem;
+}
+
+.state-description {
+    font-size: 0.8rem;
+    color: var(--dnd-light);
+    opacity: 0.8;
+}
+
+.state-actions {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.btn-state-action {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-remove-state {
+    background: var(--dnd-danger);
+    color: white;
+}
+
+.btn-remove-state:hover {
+    background: #a00;
+}
+
+/* Спасброски */
+.saving-throws-container {
+    margin-top: 1rem;
+}
+
+.saving-throw-card {
+    background: rgba(245, 230, 211, 0.1);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.saving-throw-card:hover {
+    border-color: var(--dnd-gold);
+    transform: translateY(-2px);
+}
+
+.saving-throw-card.proficient {
+    background: rgba(184, 134, 11, 0.2);
+    border-color: var(--dnd-gold);
+}
+
+.save-name {
+    color: var(--dnd-gold);
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Cinzel', serif;
+}
+
+.save-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--dnd-light);
+    margin-bottom: 0.5rem;
+}
+
+.save-proficiency {
+    color: var(--dnd-gold);
+}
+
+/* Стили для производных характеристик в статусе */
+.derived-stat-card {
+    background: rgba(210, 105, 30, 0.2);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.derived-stat-card h5 {
+    color: var(--dnd-gold);
+    margin-bottom: 0.8rem;
+    font-family: 'Cinzel', serif;
+}
+
+.derived-stat-card .derived-stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--dnd-light);
+    background: var(--dnd-primary);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.8rem;
+    border: 3px solid var(--dnd-gold);
+}
+
+.derived-stat-card small {
+    color: var(--dnd-light);
+    opacity: 0.8;
+}
+
+/* Адаптивность для раздела состояний */
+@media (max-width: 768px) {
+    .health-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .health-controls .btn {
+        max-width: 100%;
+    }
+    
+    .saving-throw-card {
+        padding: 0.8rem;
+    }
+    
+    .save-value {
+        font-size: 1.3rem;
+    }
+    
+    .state-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .state-actions {
+        margin-top: 0.5rem;
+        align-self: flex-end;
+    }
+}
+
+/* Анимации для изменений здоровья */
+.health-change {
+    animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.damage-taken {
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+/* Стили для раздела особенностей */
+.features-container {
+    padding: 1rem 0;
+}
+
+.features-list {
+    background: rgba(44, 24, 16, 0.8);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 8px;
+    padding: 1rem;
+    min-height: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.empty-features {
+    text-align: center;
+    color: var(--dnd-secondary);
+    padding: 3rem 1rem;
+}
+
+.empty-features i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Карточки особенностей */
+.feature-card {
+    background: rgba(245, 230, 211, 0.05);
+    border: 1px solid var(--dnd-secondary);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    border-color: var(--dnd-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.feature-card.race-feature {
+    border-left: 4px solid var(--dnd-success);
+}
+
+.feature-card.class-feature {
+    border-left: 4px solid var(--dnd-primary);
+}
+
+.feature-card.subclass-feature {
+    border-left: 4px solid var(--dnd-gold);
+}
+
+.feature-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.feature-name {
+    color: var(--dnd-gold);
+    font-weight: bold;
+    font-size: 1.1rem;
+    font-family: 'Cinzel', serif;
+    margin-bottom: 0.3rem;
+}
+
+.feature-level {
+    background: var(--dnd-primary);
+    color: var(--dnd-light);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border: 1px solid var(--dnd-gold);
+    white-space: nowrap;
+}
+
+.feature-description {
+    color: var(--dnd-light);
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+.feature-source {
+    color: var(--dnd-secondary);
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Навигация по уровням */
+.level-features-container {
+    margin-top: 1rem;
+}
+
+.level-navigation {
+    background: rgba(245, 230, 211, 0.1);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.level-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.level-btn {
+    background: rgba(139, 69, 19, 0.3);
+    border: 2px solid var(--dnd-secondary);
+    color: var(--dnd-light);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.level-btn:hover {
+    border-color: var(--dnd-gold);
+    transform: scale(1.1);
+}
+
+.level-btn.active {
+    background: linear-gradient(135deg, var(--dnd-primary) 0%, var(--dnd-secondary) 100%);
+    border-color: var(--dnd-gold);
+    color: var(--dnd-light);
+}
+
+/* Список всех особенностей по уровням */
+.all-features-list {
+    background: rgba(44, 24, 16, 0.8);
+    border: 2px solid var(--dnd-secondary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    min-height: 400px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.level-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--dnd-secondary);
+}
+
+.level-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.level-title {
+    color: var(--dnd-gold);
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--dnd-gold);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.level-features {
+    display: grid;
+    gap: 1rem;
+}
+
+.feature-type-badge {
+    display: inline-block;
+    background: var(--dnd-dark);
+    color: var(--dnd-light);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    margin-left: 0.5rem;
+    border: 1px solid;
+}
+
+.feature-type-badge.race {
+    background: rgba(0, 100, 0, 0.3);
+    border-color: var(--dnd-success);
+}
+
+.feature-type-badge.class {
+    background: rgba(139, 69, 19, 0.3);
+    border-color: var(--dnd-primary);
+}
+
+.feature-type-badge.subclass {
+    background: rgba(184, 134, 11, 0.3);
+    border-color: var(--dnd-gold);
+}
+
+/* Адаптивность для особенностей */
+@media (max-width: 992px) {
+    .features-list {
+        min-height: 200px;
+        max-height: 300px;
+    }
+    
+    .all-features-list {
+        min-height: 300px;
+        max-height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .level-buttons {
+        justify-content: center;
+    }
+    
+    .level-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+    
+    .feature-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .feature-level {
+        margin-top: 0.5rem;
+        align-self: flex-start;
+    }
+    
+    .feature-card {
+        padding: 0.8rem;
+    }
+}
+
+/* Анимации для появления особенностей */
+.feature-fade-in {
+    animation: featureFadeIn 0.5s ease;
+}
+
+@keyframes featureFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Стили для tooltip'ов особенностей */
+.feature-tooltip {
+    position: relative;
+    cursor: help;
+}
+
+.feature-tooltip:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--dnd-dark);
+    color: var(--dnd-light);
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--dnd-gold);
+    font-size: 0.8rem;
+    white-space: nowrap;
+    z-index: 1000;
+}
+/* Стили для навыков */
+.skills-info {
+    background: linear-gradient(135deg, rgba(139, 69, 19, 0.3) 0%, rgba(210, 105, 30, 0.3) 100%);
+    border: 2px solid var(--dnd-gold);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.skills-label {
+    color: var(--dnd-light);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.skills-value {
+    background: var(--dnd-primary);
+    color: var(--dnd-gold);
+    font-weight: bold;
+    font-size: 1.3rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    margin-left: 0.5rem;
+    border: 2px solid var(--dnd-gold);
+}
+
+.skill-category {
+    margin-bottom: 1.5rem;
+}
+
+.skill-category h5 {
+    color: var(--dnd-gold);
+    border-bottom: 1px solid var(--dnd-secondary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+    font-family: 'Cinzel', serif;
+}
+
+.skill-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(210, 105, 30, 0.2);
+}
+
+.skill-item:last-child {
+    border-bottom: none;
+}
+
+.skill-item .form-check {
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+}
+
+.skill-checkbox {
+    transform: scale(1.2);
+    margin-right: 0.8rem;
+}
+
+.skill-checkbox:checked {
+    background-color: var(--dnd-gold);
+    border-color: var(--dnd-gold);
+}
+
+.skill-value {
+    background: var(--dnd-dark);
+    padding: 0.2rem 0.8rem;
+    border-radius: 15px;
+    border: 1px solid var(--dnd-secondary);
+    font-weight: bold;
+    min-width: 45px;
+    text-align: center;
+    color: var(--dnd-light);
+}
+/* Исправляем стили выпадающих списков */
+.form-select {
+    background-color: rgba(44, 24, 16, 0.9) !important;
+    border: 2px solid var(--dnd-secondary) !important;
+    color: var(--dnd-light) !important;
+    border-radius: 8px !important;
+}
+
+.form-select:focus {
+    background-color: rgba(44, 24, 16, 0.95) !important;
+    border-color: var(--dnd-gold) !important;
+    color: var(--dnd-light) !important;
+    box-shadow: 0 0 0 0.2rem rgba(184, 134, 11, 0.25) !important;
+}
+
+.form-select option {
+    background-color: var(--dnd-dark) !important;
+    color: var(--dnd-light) !important;
+    padding: 0.5rem !important;
+}
+
+.form-select option:hover,
+.form-select option:focus,
+.form-select option:checked {
+    background-color: var(--dnd-primary) !important;
+    color: var(--dnd-light) !important;
+}
+
+/* Стили для Bootstrap select */
+.dnd-select {
+    background-color: rgba(44, 24, 16, 0.9) !important;
+    border: 2px solid var(--dnd-secondary) !important;
+    color: var(--dnd-light) !important;
+}
+
+.dnd-select:focus {
+    background-color: rgba(44, 24, 16, 0.95) !important;
+    border-color: var(--dnd-gold) !important;
+    color: var(--dnd-light) !important;
+    box-shadow: 0 0 0 0.2rem rgba(184, 134, 11, 0.25) !important;
+}
