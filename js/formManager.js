@@ -46,7 +46,8 @@ class FormManager {
             attributes: window.attributesManager ? window.attributesManager.getAttributesData() : {},
             inventory: window.inventoryManager ? window.inventoryManager.getInventoryData() : {},
             status: window.statusManager ? window.statusManager.getStatusData() : {},
-            features: window.featuresManager ? window.featuresManager.getFeaturesData() : {}
+            features: window.featuresManager ? window.featuresManager.getFeaturesData() : {},
+            notes: window.notesManager ? window.notesManager.getNotesData() : {}
         };
     }
 
@@ -98,6 +99,10 @@ class FormManager {
         // Заполняем навыки
         if (characterData.skills) {
             window.attributesManager.setSkillsData(characterData.skills);
+        }
+        // Заполняем заметки
+        if (characterData.notes) {
+            window.notesManager.setNotesData(characterData.notes);
         }
         // Устанавливаем спасброски на основе класса
         if (characterData.class) {

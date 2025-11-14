@@ -26,6 +26,7 @@ class DNDApp {
         window.featuresManager = new FeaturesManager();
         window.raceBonusManager = new RaceBonusManager();
         window.statusManager = new StatusManager();
+        window.notesManager = new NotesManager();
         window.syncManager = new SyncManager();
 
         this.bindEvents();
@@ -202,6 +203,9 @@ class DNDApp {
         const subclassSection = document.getElementById('subclassSection');
         const spellsTabItem = document.getElementById('spellsTabItem');
         
+        // Сбрасываем выбор подкласса при изменении класса
+        document.getElementById('characterSubclass').value = '';
+        
         // Показать/скрыть подклассы
         if (['wizard', 'cleric', 'fighter', 'rogue'].includes(classId)) {
             subclassSection.style.display = 'block';
@@ -236,20 +240,45 @@ class DNDApp {
         const subclassSelect = document.getElementById('characterSubclass');
         subclassSelect.innerHTML = '<option value="">Выберите подкласс</option>';
         
-        // Временные данные подклассов
+        // Временные данные подклассов - используем английские ID
         const subclasses = {
-            wizard: ['Школа воплощения', 'Школа ограждения', 'Школа вызова', 'Школа гадания', 
-                    'Школа одурманивания', 'Школа иллюзии', 'Школа некромантии', 'Школа преобразования'],
-            cleric: ['Знание', 'Жизнь', 'Свет', 'Природа', 'Буря', 'Обман', 'Война'],
-            fighter: ['Полевой воин', 'Рыцарь-чародей', 'Следопыт', 'Мастер боевых искусств'],
-            rogue: ['Вор', 'Убийца', 'Мистический ловкач']
+            'wizard': [
+                { id: 'evocation', name: 'Школа воплощения' },
+                { id: 'abjuration', name: 'Школа ограждения' },
+                { id: 'conjuration', name: 'Школа вызова' },
+                { id: 'divination', name: 'Школа гадания' },
+                { id: 'enchantment', name: 'Школа одурманивания' },
+                { id: 'illusion', name: 'Школа иллюзии' },
+                { id: 'necromancy', name: 'Школа некромантии' },
+                { id: 'transmutation', name: 'Школа преобразования' }
+            ],
+            'cleric': [
+                { id: 'knowledge', name: 'Знание' },
+                { id: 'life', name: 'Жизнь' },
+                { id: 'light', name: 'Свет' },
+                { id: 'nature', name: 'Природа' },
+                { id: 'tempest', name: 'Буря' },
+                { id: 'trickery', name: 'Обман' },
+                { id: 'war', name: 'Война' }
+            ],
+            'fighter': [
+                { id: 'battle-master', name: 'Полевой воин' },
+                { id: 'eldritch-knight', name: 'Рыцарь-чародей' },
+                { id: 'champion', name: 'Следопыт' },
+                { id: 'samurai', name: 'Мастер боевых искусств' }
+            ],
+            'rogue': [
+                { id: 'thief', name: 'Вор' },
+                { id: 'assassin', name: 'Убийца' },
+                { id: 'arcane-trickster', name: 'Мистический ловкач' }
+            ]
         };
         
         if (subclasses[classId]) {
             subclasses[classId].forEach(subclass => {
                 const option = document.createElement('option');
-                option.value = subclass.toLowerCase().replace(/ /g, '-');
-                option.textContent = subclass;
+                option.value = subclass.id;
+                option.textContent = subclass.name;
                 subclassSelect.appendChild(option);
             });
         }
@@ -400,11 +429,11 @@ class DNDApp {
             level: parseInt(document.getElementById('levelDisplay').textContent),
             experience: parseInt(document.getElementById('characterExperience').value),
             speed: parseInt(document.getElementById('characterSpeed').value),
-            attributes: finalAttributes, // Сохраняем с бонусами
-            skills: skillsData,
+            attributes: finalAttributes,
             inventory: inventoryManager.getInventoryData(),
             status: statusManager.getStatusData(),
             features: featuresManager.getFeaturesData(),
+            notes: notesManager.getNotesData(), // ДОБАВЛЯЕМ заметки
             created: new Date().toISOString(),
             updated: new Date().toISOString()
         };
@@ -439,6 +468,8 @@ class DNDApp {
         window.statusManager = new StatusManager();
         // Сброс особенностей
         window.featuresManager = new FeaturesManager();
+        // Сброс заметок
+        window.notesManager = new NotesManager();
 
     }
 

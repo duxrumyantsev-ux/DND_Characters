@@ -472,6 +472,110 @@ class FeaturesManager {
                             type: 'subclass'
                         }
                     ]
+                },
+                'tempest': {
+                    name: 'Буря',
+                    features: [
+                        {
+                            name: 'Громовое владение',
+                            level: 1,
+                            description: 'Когда существо атакует вас в ближнем бою, вы можете ответить ударом молнии.',
+                            type: 'subclass'
+                        },
+                        {
+                            name: 'Разрушительный гнев',
+                            level: 2,
+                            description: 'Когда вы наносите урон молнией или громом, вы можете использовать канал божественности, чтобы нанести максимальный урон.',
+                            type: 'subclass'
+                        }
+                    ]
+                },
+                'trickery': {
+                    name: 'Обман',
+                    features: [
+                        {
+                            name: 'Благословение обманщика',
+                            level: 1,
+                            description: 'Вы можете действием прикоснуться к существу и дать ему преимущество на проверки Ловкости.',
+                            type: 'subclass'
+                        },
+                        {
+                            name: 'Призрачный двойник',
+                            level: 2,
+                            description: 'Вы можете создать иллюзорный двойник самого себя.',
+                            type: 'subclass'
+                        }
+                    ]
+                },
+                'nature': {
+                    name: 'Природа',
+                    features: [
+                        {
+                            name: 'Посвящение природы',
+                            level: 1,
+                            description: 'Вы получаете владение одним навыком из следующих: Уход за животными, Природа, Выживание.',
+                            type: 'subclass'
+                        },
+                        {
+                            name: 'Дар природы',
+                            level: 2,
+                            description: 'Вы можете использовать канал божественности, чтобы очаровать животных и растения.',
+                            type: 'subclass'
+                        }
+                    ]
+                }
+            },
+            'rogue': {
+                'thief': {
+                    name: 'Вор',
+                    features: [
+                        {
+                            name: 'Быстрые руки',
+                            level: 3,
+                            description: 'Вы можете использовать бонусное действие для выполнения проверки Ловкости рук или использования воровских инструментов.',
+                            type: 'subclass'
+                        },
+                        {
+                            name: 'Второстепенный скалолаз',
+                            level: 3,
+                            description: 'Вы можете карабкаться без штрафа к скорости.',
+                            type: 'subclass'
+                        }
+                    ]
+                },
+                'assassin': {
+                    name: 'Убийца',
+                    features: [
+                        {
+                            name: 'Личина',
+                            level: 3,
+                            description: 'Вы можете подражать голосам и манере речи других существ.',
+                            type: 'subclass'
+                        },
+                        {
+                            name: 'Смертельный удар',
+                            level: 3,
+                            description: 'Вы наносите дополнительный урон существам, которые ещё не совершали ход в бою.',
+                            type: 'subclass'
+                        }
+                    ]
+                },
+                'arcane-trickster': {
+                    name: 'Мистический ловкач',
+                    features: [
+                        {
+                            name: 'Магическое воровство',
+                            level: 3,
+                            description: 'Вы можете использовать действие, чтобы попытаться подавить магию на существе или предмете.',
+                            type: 'subclass'
+                        },
+                        {
+                            name: 'Заклинательство',
+                            level: 3,
+                            description: 'Вы изучаете основы магии и можете творить заклинания.',
+                            type: 'subclass'
+                        }
+                    ]
                 }
             }
         };
@@ -590,7 +694,10 @@ class FeaturesManager {
 
     updateSubclassFeatures() {
         const subclassFeaturesElement = document.getElementById('subclassFeatures');
-        if (!subclassFeaturesElement) return;
+        if (!subclassFeaturesElement) {
+            console.error('Элемент subclassFeatures не найден!');
+            return;
+        }
 
         const classSelect = document.getElementById('characterClass');
         const subclassSelect = document.getElementById('characterSubclass');
@@ -598,13 +705,36 @@ class FeaturesManager {
         const classId = classSelect ? classSelect.value : '';
         const subclassId = subclassSelect ? subclassSelect.value : '';
 
-        console.log('Обновление особенностей подкласса:', classId, subclassId);
+        console.log('Обновление особенностей подкласса:', { classId, subclassId });
 
-        if (!classId || !subclassId || !this.featuresData.subclasses[classId] || !this.featuresData.subclasses[classId][subclassId]) {
+        if (!classId || !subclassId) {
             subclassFeaturesElement.innerHTML = `
                 <div class="empty-features">
                     <i class="bi bi-info-circle"></i>
                     <p>Выберите подкласс, чтобы увидеть его особенности</p>
+                </div>
+            `;
+            return;
+        }
+
+        if (!this.featuresData.subclasses[classId]) {
+            console.error('Нет данных подклассов для класса:', classId);
+            subclassFeaturesElement.innerHTML = `
+                <div class="empty-features">
+                    <i class="bi bi-info-circle"></i>
+                    <p>Для этого класса нет данных о подклассах</p>
+                </div>
+            `;
+            return;
+        }
+
+        if (!this.featuresData.subclasses[classId][subclassId]) {
+            console.error('Нет данных для подкласса:', subclassId, 'в классе:', classId);
+            console.log('Доступные подклассы:', Object.keys(this.featuresData.subclasses[classId]));
+            subclassFeaturesElement.innerHTML = `
+                <div class="empty-features">
+                    <i class="bi bi-info-circle"></i>
+                    <p>Для этого подкласса нет данных об особенностях</p>
                 </div>
             `;
             return;
@@ -617,6 +747,8 @@ class FeaturesManager {
         const availableFeatures = subclass.features.filter(
             feature => feature.level <= currentLevel
         );
+
+        console.log('Найдены особенности подкласса:', availableFeatures);
 
         if (availableFeatures.length === 0) {
             subclassFeaturesElement.innerHTML = `
